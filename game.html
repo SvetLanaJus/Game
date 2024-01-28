@@ -69,115 +69,165 @@
       </div>
     </div>
     <script>
-            //Denne JS-koden er laget klar for deg. Den trenger du ikke endre på.
+      //Denne JS-koden er laget klar for deg. Den trenger du ikke endre på.
 
-            //Stats for heroes
-            let heroesArray = [
-              {
-                id: 0,
-                name: "Henriette Healer",
-                maxHP: 400,
-                currentHP: 400,
-                damage: 100,
-                alive: true,
-              },
-              {
-                id: 1,
-                name: "Ariana archer",
-                maxHP: 500,
-                currentHP: 500,
-                damage: 400,
-                alive: true,
-              },
-              {
-                id: 2,
-                name: "Wyona Warrior",
-                maxHP: 600,
-                currentHP: 600,
-                damage: 400,
-                alive: true,
-              },
-            ];
+      //Stats for heroes
+      let heroesArray = [
+        {
+          id: 0,
+          name: "Henriette Healer",
+          maxHP: 400,
+          currentHP: 400,
+          damage: 100,
+          alive: true,
+        },
+        {
+          id: 1,
+          name: "Ariana archer",
+          maxHP: 500,
+          currentHP: 500,
+          damage: 400,
+          alive: true,
+        },
+        {
+          id: 2,
+          name: "Wyona Warrior",
+          maxHP: 600,
+          currentHP: 600,
+          damage: 400,
+          alive: true,
+        },
+      ];
 
-            let dragonObject = {
-              name: "Daar Dragon",
-              maxHP: 2000,
-              currentHP: 2000,
-              damage: 200,
-              alive: true,
-            };
+      let dragonObject = {
+        name: "Daar Dragon",
+        maxHP: 2000,
+        currentHP: 2000,
+        damage: 200,
+        alive: true,
+      };
 
-            // Variabler med navner for heroene og dragen
-            const HealerName = document.getElementById("healer-name-txt");
-            HealerName.textContent = "Henriette Healer";
+      // Variabler med navner for heroene og dragen
+      const HealerName = document.getElementById("healer-name-txt");
+      HealerName.textContent = "Henriette Healer";
 
-            const ArcherName = document.getElementById("archer-name-txt");
-            ArcherName.textContentn = "Ariana Archer";
+      const ArcherName = document.getElementById("archer-name-txt");
+      ArcherName.textContentn = "Ariana Archer";
 
-            const WarriorName = document.getElementById("warrior-name-txt");
-            WarriorName.textContent = "Wyona Warrior";
+      const WarriorName = document.getElementById("warrior-name-txt");
+      WarriorName.textContent = "Wyona Warrior";
 
-            const DragonName = document.getElementById("dragon-name-txt");
-            DragonName.textContent = "Daar Dragon";
+      const DragonName = document.getElementById("dragon-name-txt");
+      DragonName.textContent = "Daar Dragon";
       // Variabler for inhold til helsekontainere
-            let healerHealthText = document.getElementById("healer-health-txt");
-            let archerHealthText = document.getElementById("archer-health-txt");
-            let warriorHealthText = document.getElementById("warrior-health-txt");
-            let dragoHealthText = document.querySelector(".dragon-health-txt");
+      let healerHealthText = document.getElementById("healer-health-txt");
+      let archerHealthText = document.getElementById("archer-health-txt");
+      let warriorHealthText = document.getElementById("warrior-health-txt");
+      let dragoHealthText = document.querySelector(".dragon-health-txt");
       // Variabler med aktive bilder
-            const healerImg = document.querySelector(".healer");
-            const archerImg = document.querySelector(".archer");
-            const warrirorImg = document.querySelector(".warrior");
+      const healerImg = document.querySelector(".healer");
+      const archerImg = document.querySelector(".archer");
+      const warrirorImg = document.querySelector(".warrior");
 
       // Variabler for helsekontainere for heroene og drage
-            let healerHealthBar = document.querySelector(".healthbar healer-health");
-            let archerHealthBar = document.querySelector(".healthbar archer-health");
-            let warriorHealthBar = document.querySelector(".healthbar warrior-health");
-            let dragonHealthBar = document.querySelector(".healthbar dragon-health");
+      let healerHealthBar = document.querySelector(".healthbar healer-health");
+      let archerHealthBar = document.querySelector(".healthbar archer-health");
+      let warriorHealthBar = document.querySelector(
+        ".healthbar warrior-health"
+      );
+      let dragonHealthBar = document.querySelector(".healthbar dragon-health");
 
-            healerImg.addEventListener("click", HealerAngrep);
-            archerImg.addEventListener("click", ArcherAngrep);
-            warrirorImg.addEventListener("click", WarriorAngrep);
+      healerImg.addEventListener("click", HealerAngrep);
+      archerImg.addEventListener("click", ArcherAngrep);
+      warrirorImg.addEventListener("click", WarriorAngrep);
 
-            let DragoHealth = 2000;
-            let HealerHealth = 400;
-            let ArcherHealth = 600;
-            let WarriorHealth = 800;
+      function HealerAngrep() {
+        alert(
+          `${heroesArray[0].name} har gjørt ${heroesArray[0].damage} skade på ${dragonObject.name}!`
+        );
+        DragoHealth(0);
+        DrageAngreperBack();
+      }
 
-           function HealerAngrep() {
-              alert(`${heroesArray[0].name} har gjørt ${heroesArray[0].damage} skade på ${dragonObject.name}!`)
-              DragoHealth(0);
-              DrageAngreperBack();
-              }
+      function ArcherAngrep() {
+        alert(
+          `${heroesArray[1].name} har gjørt ${heroesArray[1].damage} skade på ${dragonObject.name}!`
+        );
+        DragoHealth(1);
+        DrageAngreperBack();
+      }
 
-           function ArcherAngrep() {
-              alert(`${heroesArray[1].name} har gjørt ${heroesArray[1].damage} skade på ${dragonObject.name}!`)
-              DragoHealth(1);
-              DrageAngreperBack();
-           }
+      function WarriorAngrep() {
+        alert(
+          `${heroesArray[2].name} har gjørt ${heroesArray[2].damage} skade på ${dragonObject.name}!`
+        );
+        DragoHealth(2);
+        DrageAngreperBack();
+      }
 
-           function WarriorAngrep(){
-              alert(`${heroesArray[2].name} har gjørt ${heroesArray[2].damage} skade på ${dragonObject.name}!`)
-              DragoHealth(2);
-              DrageAngreperBack();
-           }
+      function DragoHealth(index) {
+        let DragoHealthReduse =
+          dragonObject.currentHP - heroesArray[index].damage;
+        dragonObject.currentHP = DragoHealthReduse;
+        if (DragoHealthReduse < 0) {
+          DragoHealthReduse = 0;
+        }
+        dragoHealthText.innerHTML = DragoHealthReduse;
+      }
 
-           
+      function DrageAngreperBack() {
+        const randomHero = Math.floor(Math.random() * heroesArray.length);
 
-           function DragoHealth(index) {
-            let DragoHealthReduse = dragonObject.currentHP - heroesArray[index].damage;
-            dragonObject.currentHP = DragoHealthReduse;
-            if (DragoHealthReduse < 0) {
-               DragoHealthReduse = 0;
-            }
-            dragoHealthText.innerHTML = DragoHealthReduse;
+        //Her skjekkes om at den valgte helten er i live
+        if (heroesArray[randomHero].alive) {
+          alert(
+            `${dragonObject.name} har angrepet ${heroesArray[randomHero].name}!`
+          );
+          //Her reduseres heltens helse
+          heroesArray[randomHero].currentHP -= dragonObject.damage;
+          //Her skjekkes at helten har overleved
+          if (heroesArray[randomHero].currentHP <= 0) {
+            heroesArray[randomHero].currentHP = 0;
+            heroesArray[randomHero].alive = false;
+            alert(
+              `${heroesArray[randomHero].name} har blitt drept av ${dragonObject.name}!`
+            );
           }
+          updateHeroHealth(randomHero);
+        }
+      }
 
-           function DrageAngreperBack() {
+      //Her skjekkes at hvis alle heroes er døde
+      if (allHeroesDead()) {
+        alert("Alle heltene er døde. The game is over!");
+      }
 
+      //Her oppdateres heltenes helse i html
 
+      function updateHeroHealth(index) {
+        switch (index) {
+          case 0:
+            healerHealthText.innerHTML = `${heroesArray[0].currentHP} / ${heroesArray[0].maxHP} HP`;
+            break;
+          case 1:
+            archerHealthText.innerHTML = `${heroesArray[1].currentHP} / ${heroesArray[1].maxHP} HP`;
+            break;
+          case 2:
+            warriorHealthText.innerHTML = `${heroesArray[2].currentHP} / ${heroesArray[2].maxHP} HP`;
+            break;
+          default:
+            break;
+        }
+      }
 
-           }
+      function allHeroesDead() {
+        for (let i = 0; i < heroesArray.length; i++) {
+          if (heroesArray[i].alive) {
+            return false;
+          }
+        }
+        return true;
+      }
     </script>
   </body>
 </html>
