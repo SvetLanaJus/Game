@@ -128,6 +128,7 @@
       const healerImg = document.querySelector(".healer");
       const archerImg = document.querySelector(".archer");
       const warrirorImg = document.querySelector(".warrior");
+      const dragoImg = document.querySelector(".dragon-container");
 
       // Variabler for helsekontainere for heroene og drage
       let healerHealthBar = document.querySelector(".healthbar healer-health");
@@ -171,6 +172,9 @@
         dragonObject.currentHP = DragoHealthReduse;
         if (DragoHealthReduse < 0) {
           DragoHealthReduse = 0;
+          dragonObject.alive = false;
+          dragoImg.remove();
+          alert("Gratulerer! Du har vunnet spillet!");
         }
         dragoHealthText.innerHTML = DragoHealthReduse;
       }
@@ -218,8 +222,27 @@
           default:
             break;
         }
+        if (heroesArray[index].currentHP <= 0){
+          heroesArray[index].alive = false;
+          removeHeroImg (index);
+        }
       }
 
+      function removeHeroImg (index) {
+        switch (index) {
+          case 0:
+            healerImg.remove();
+            break;
+          case 1:
+            archerImg.remove();
+            break;
+          case 2:
+            warrirorImg.remove();
+            break;
+          default:
+            break;
+            }
+        }
       function allHeroesDead() {
         for (let i = 0; i < heroesArray.length; i++) {
           if (heroesArray[i].alive) {
