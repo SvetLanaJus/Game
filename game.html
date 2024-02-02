@@ -112,7 +112,7 @@
       HealerName.textContent = "Henriette Healer";
 
       const ArcherName = document.getElementById("archer-name-txt");
-      ArcherName.textContentn = "Ariana Archer";
+      ArcherName.textContent = "Ariana Archer";
 
       const WarriorName = document.getElementById("warrior-name-txt");
       WarriorName.textContent = "Wyona Warrior";
@@ -127,50 +127,64 @@
       // Variabler med aktive bilder
       const healerImg = document.querySelector(".healer");
       const archerImg = document.querySelector(".archer");
-      const warrirorImg = document.querySelector(".warrior");
+      const warriorImg = document.querySelector(".warrior");
       const dragoImg = document.querySelector(".dragon-container");
 
-      // Variabler for helsekontainere for heroene og drage
-      let healerHealthBar = document.querySelector(".healthbar healer-health");
-      let archerHealthBar = document.querySelector(".healthbar archer-health");
-      let warriorHealthBar = document.querySelector(
-        ".healthbar warrior-health"
-      );
-      let dragonHealthBar = document.querySelector(".healthbar dragon-health");
+      healerImg.addEventListener("click", function () {
+        heroAngrep(0);
+      });
+      archerImg.addEventListener("click", function () {
+        heroAngrep(1);
+      });
+      warriorImg.addEventListener("click", function () {
+        heroAngrep(2);
+      });
 
-      healerImg.addEventListener("click", HealerAngrep);
-      archerImg.addEventListener("click", ArcherAngrep);
-      warrirorImg.addEventListener("click", WarriorAngrep);
+      function heroAngrep(index) {
+        if (dragonObject.alive == true) {
+          alert(
+            `${heroesArray[index].name} har gjørt ${heroesArray[index].damage} skade på ${dragonObject.name}!`
+          );
 
-      function HealerAngrep() {
-        alert(
-          `${heroesArray[0].name} har gjørt ${heroesArray[0].damage} skade på ${dragonObject.name}!`
-        );
-        DragoHealth(0);
-        DrageAngreperBack();
+          DragoHealth(index);
+          DrageAngreperBack();
+        } else {
+          alert(`${dragonObject.name} er død. Start spillet på nytt`);
+        }
       }
+      function DrageAngreperBack() {
+        if (dragonObject.alive == true) {
+          const randomHero = Math.floor(Math.random() * heroesArray.length);
 
-      function ArcherAngrep() {
-        alert(
-          `${heroesArray[1].name} har gjørt ${heroesArray[1].damage} skade på ${dragonObject.name}!`
-        );
-        DragoHealth(1);
-        DrageAngreperBack();
-      }
-
-      function WarriorAngrep() {
-        alert(
-          `${heroesArray[2].name} har gjørt ${heroesArray[2].damage} skade på ${dragonObject.name}!`
-        );
-        DragoHealth(2);
-        DrageAngreperBack();
+          //Her skjekkes om at den valgte helten er i live
+          if (heroesArray[randomHero].alive) {
+            alert(
+              `${dragonObject.name} har angrepet ${heroesArray[randomHero].name}!`
+            );
+            //Her reduseres heltens helse
+            heroesArray[randomHero].currentHP -= dragonObject.damage;
+            //Her skjekkes at helten har overleved
+            if (heroesArray[randomHero].currentHP <= 0) {
+              heroesArray[randomHero].currentHP = 0;
+              heroesArray[randomHero].alive = false;
+              alert(
+                `${heroesArray[randomHero].name} har blitt drept av ${dragonObject.name}!`
+              );
+            }
+            updateHeroHealth(randomHero);
+            //Her skjekkes at hvis alle heroes er døde
+            if (allHeroesDead()) {
+              alert("Alle heltene er døde. The game is over!");
+            }
+          }
+        }
       }
 
       function DragoHealth(index) {
         let DragoHealthReduse =
-          dragonObject.currentHP - heroesArray[index].damage;
+        dragonObject.currentHP - heroesArray[index].damage;
         dragonObject.currentHP = DragoHealthReduse;
-        if (DragoHealthReduse < 0) {
+        if (DragoHealthReduse <= 0) {
           DragoHealthReduse = 0;
           dragonObject.alive = false;
           dragoImg.remove();
@@ -179,56 +193,40 @@
         dragoHealthText.innerHTML = DragoHealthReduse;
       }
 
-      function DrageAngreperBack() {
-        const randomHero = Math.floor(Math.random() * heroesArray.length);
-
-        //Her skjekkes om at den valgte helten er i live
-        if (heroesArray[randomHero].alive) {
-          alert(
-            `${dragonObject.name} har angrepet ${heroesArray[randomHero].name}!`
-          );
-          //Her reduseres heltens helse
-          heroesArray[randomHero].currentHP -= dragonObject.damage;
-          //Her skjekkes at helten har overleved
-          if (heroesArray[randomHero].currentHP <= 0) {
-            heroesArray[randomHero].currentHP = 0;
-            heroesArray[randomHero].alive = false;
-            alert(
-              `${heroesArray[randomHero].name} har blitt drept av ${dragonObject.name}!`
-            );
-          }
-          updateHeroHealth(randomHero);
-        }
-      }
-
-      //Her skjekkes at hvis alle heroes er døde
-      if (allHeroesDead()) {
-        alert("Alle heltene er døde. The game is over!");
-      }
-
       //Her oppdateres heltenes helse i html
 
       function updateHeroHealth(index) {
         switch (index) {
           case 0:
+            heroesArray[0].currentHP = Math.max(
+              heroesArray[0].currentHP - dragonObject.damage,
+              0
+            );
             healerHealthText.innerHTML = `${heroesArray[0].currentHP} / ${heroesArray[0].maxHP} HP`;
             break;
           case 1:
+            heroesArray[1].currentHP = Math.max(
+              heroesArray[1].currentHP - dragonObject.damage,
+              0
+            );
             archerHealthText.innerHTML = `${heroesArray[1].currentHP} / ${heroesArray[1].maxHP} HP`;
             break;
           case 2:
+            heroesArray[2].currentHP = Math.max(
+              heroesArray[2].currentHP - dragonObject.damage,
+              0
+            );
             warriorHealthText.innerHTML = `${heroesArray[2].currentHP} / ${heroesArray[2].maxHP} HP`;
             break;
           default:
             break;
         }
-        if (heroesArray[index].currentHP <= 0){
+        if (heroesArray[index].currentHP <= 0) {
           heroesArray[index].alive = false;
-          removeHeroImg (index);
+          removeHeroImg(index);
         }
       }
-
-      function removeHeroImg (index) {
+      function removeHeroImg(index) {
         switch (index) {
           case 0:
             healerImg.remove();
@@ -237,12 +235,12 @@
             archerImg.remove();
             break;
           case 2:
-            warrirorImg.remove();
+            warriorImg.remove();
             break;
           default:
             break;
-            }
         }
+      }
       function allHeroesDead() {
         for (let i = 0; i < heroesArray.length; i++) {
           if (heroesArray[i].alive) {
