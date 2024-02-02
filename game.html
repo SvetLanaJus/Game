@@ -184,6 +184,8 @@
         }
       }
 
+      
+
       function DragoHealth(index) {
         dragonObject.currentHP -= heroesArray[index].damage;
         if (dragonObject.currentHP <= 0) {
@@ -204,14 +206,14 @@
               heroesArray[0].currentHP - dragonObject.damage,
               0
             );
-            healerHealthText.innerHTML = `${heroesArray[0].currentHP} / ${heroesArray[0].maxHP}`;
+            healerHealthText.innerHTML = `${heroesArray[0].currentHP} / ${heroesArray[0].maxHP} HP`;
             break;
           case 1:
             heroesArray[1].currentHP = Math.max(
               heroesArray[1].currentHP - dragonObject.damage,
               0
             );
-            archerHealthText.innerHTML = `${heroesArray[1].currentHP} / ${heroesArray[1].maxHP}`;
+            archerHealthText.innerHTML = `${heroesArray[1].currentHP} / ${heroesArray[1].maxHP} HP`;
             break;
           case 2:
             heroesArray[2].currentHP = Math.max(
